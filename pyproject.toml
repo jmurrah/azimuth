@@ -8,6 +8,13 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 astral = "^3.2"
+python-dateutil = "^2.9.0.post0"
+pandas = "^2.2.2"
+matplotlib = "^3.8.4"
+
+
+[tool.poetry.scripts]
+azimuth = "azimuth.calculate_azimuth:main"
 
 
 [build-system]
