@@ -1,3 +1,4 @@
+from astral.location import Location
 from astral.sun import sun
 from astral import LocationInfo
 import csv
@@ -14,24 +15,24 @@ def get_date_range():
     return start, end
 
 
-def calculate_azimuth_data(location: LocationInfo):
+def calculate_azimuth_data(location_info: LocationInfo):
     start_date, end_date = get_date_range()
     azimuth_data = []
     delta = timedelta(days=1)
     date = start_date
 
     while date <= end_date:
-        sun_data = sun(location.observer, date=date, tzinfo=location.timezone)
-        breakpoint()
-        azimuth_rise = location.solar_azimuth(sun_data["sunrise"])
-        azimuth_set = location.solar_azimuth(sun_data["sunset"])
+        sun_data = sun(location_info.observer, date=date, tzinfo=location_info.timezone)
+        loc = Location(location_info)
+        azimuth_rise = loc.solar_azimuth(sun_data["sunrise"])
+        azimuth_set = loc.solar_azimuth(sun_data["sunset"])
         azimuth_data.append(
             {
                 "date": date,
                 "sunrise": sun_data["sunrise"],
                 "sunset": sun_data["sunset"],
-                "azimuth_rise": azimuth_rise,
-                "azimuth_set": azimuth_set,
+                "azimuth_rise": str(round(azimuth_rise, 2)) + "\u00B0",
+                "azimuth_set": str(round(azimuth_set, 2)) + "\u00B0",
             }
         )
         date += delta
@@ -56,8 +57,8 @@ def collect_location_info() -> LocationInfo:
 
 
 def main():
-    location = collect_location_info()
-    azimuth_data = calculate_azimuth_data(location)
+    location_info = collect_location_info()
+    azimuth_data = calculate_azimuth_data(location_info)
 
     with open("azimuth_data.csv", mode="w") as file:
         writer = csv.DictWriter(file, fieldnames=azimuth_data[0].keys())
