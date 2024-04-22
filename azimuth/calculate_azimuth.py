@@ -1,16 +1,22 @@
-from astral.location import Location
-from astral.sun import sun
-import astral
 import csv
 from datetime import datetime, timedelta
 
+import astral
+
+from astral.location import Location
+from astral.sun import sun
+
+
+def get_input(prompt: str) -> str:
+    return input(prompt)
+
 
 def get_location_info() -> astral.LocationInfo:
-    name = input("Enter the name of the location: ")
-    region = input("Enter the region of the location: ")
-    timezone = input("Enter the timezone of the location: ")
-    latitude = float(input("Enter the latitude of the location: "))
-    longitude = float(input("Enter the longitude of the location: "))
+    name = get_input("Enter the name of the location: ")
+    region = get_input("Enter the region of the location: ")
+    timezone = get_input("Enter the timezone of the location: ")
+    latitude = float(get_input("Enter the latitude of the location: "))
+    longitude = float(get_input("Enter the longitude of the location: "))
 
     return astral.LocationInfo(
         name=name,
@@ -23,9 +29,11 @@ def get_location_info() -> astral.LocationInfo:
 
 def get_date_range() -> tuple[datetime, datetime]:
     start_date = datetime.strptime(
-        input("Enter the start date (YYYY-MM-DD): "), "%Y-%m-%d"
+        get_input("Enter the start date (YYYY-MM-DD): "), "%Y-%m-%d"
     )
-    end_date = datetime.strptime(input("Enter the end date (YYYY-MM-DD): "), "%Y-%m-%d")
+    end_date = datetime.strptime(
+        get_input("Enter the end date (YYYY-MM-DD): "), "%Y-%m-%d"
+    )
 
     return start_date, end_date
 
@@ -34,9 +42,9 @@ def get_azimuth_data(
     location_info: astral.LocationInfo, date: datetime
 ) -> dict[str, str]:
     sun_data = sun(location_info.observer, date=date, tzinfo=location_info.timezone)
-    loc = Location(location_info)
-    azimuth_rise = loc.solar_azimuth(sun_data["sunrise"])
-    azimuth_set = loc.solar_azimuth(sun_data["sunset"])
+    location = Location(location_info)
+    azimuth_rise = location.solar_azimuth(sun_data["sunrise"])
+    azimuth_set = location.solar_azimuth(sun_data["sunset"])
 
     return {
         "date": date.strftime("%b. %d, %Y"),

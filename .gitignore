@@ -2,3 +2,4 @@
 __pycache__/
 .csv
 .mypy_cache/
+.coverage
