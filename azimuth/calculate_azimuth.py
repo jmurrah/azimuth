@@ -5,7 +5,7 @@ import csv
 from datetime import datetime, timedelta
 
 
-def collect_location_info() -> astral.LocationInfo:
+def get_location_info() -> astral.LocationInfo:
     name = input("Enter the name of the location: ")
     region = input("Enter the region of the location: ")
     timezone = input("Enter the timezone of the location: ")
@@ -77,6 +77,6 @@ def write_to_csv(
 
 
 def main():
-    location_info = collect_location_info()
+    location_info = get_location_info()
     azimuth_data = calculate_azimuth_data(location_info)
     write_to_csv(azimuth_data, location_info)
