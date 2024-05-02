@@ -50,8 +50,8 @@ def get_azimuth_data(
         "date": date.strftime("%b. %d, %Y"),
         "sunrise": f"{sun_data['sunrise'].time().strftime('%I:%M:%S')} a.m.",
         "sunset": f"{(sun_data['sunset'] - timedelta(hours=12)).time().strftime('%I:%M:%S')} p.m.",
-        "azimuth_sunrise": f"{round(azimuth_rise, 2)}\u00B0",
-        "azimuth_sunset": f"{round(azimuth_set, 2)}\u00B0",
+        "azimuth_sunrise": f"{round(azimuth_rise, 2)}\u00b0",
+        "azimuth_sunset": f"{round(azimuth_set, 2)}\u00b0",
     }
 
 
