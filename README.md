@@ -1,5 +1,5 @@
-# Calculate the Daily Solar Azimuth Data for a Specified Period.
-### Create a CSV file that includes the following azimuth data for a specified period:
+# Calculate the Daily Solar Azimuth Data for a Period.
+### Create a CSV file that includes the following azimuth data for a period:
 - Date
 - Sunrise Time
 - Sunset Time
