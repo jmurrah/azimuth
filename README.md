@@ -6,7 +6,7 @@
 - Sunrise Azimuth Angle (from NORTH)
 - Sunset Azimuth Angle (from NORTH)
 
-#### Example Output
+#### Example Output:
 ![image](https://github.com/jmurrah/azimuth/assets/110310485/0acb4b6b-b796-47ff-977e-64a15eb8b17b)
 
 ## Getting Started
